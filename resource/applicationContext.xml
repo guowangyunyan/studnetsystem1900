@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="
+        http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/context
+        http://www.springframework.org/schema/context/spring-context.xsd">
+
+	<import resource="classpath:connection.xml" />
+
+	<bean id="userValidator" class="com.training.validator.UserValidator"></bean>
+	<bean id="loginValidator" class="com.training.validator.LoginValidator"></bean>
+	<bean id="userService" class="com.training.service.impl.UserServiceImpl">
+		<property name="commonService" ref="commonService"></property>
+		<property name="userModelConvert" ref="userModelConvert"></property>
+		<property name="md5Encoder" ref="md5Encoder"></property>
+	</bean>
+	
+	<bean id="userModelConvert" class="com.training.convert.UserModelConvert">
+		<property name="md5Encoder" ref="md5Encoder"></property>
+	
+	</bean>
+	
+	<bean id="md5Encoder" class="org.springframework.security.authentication.encoding.Md5PasswordEncoder"/>
+	
+	<bean id="studentService" class="com.training.service.impl.StudentServiceImpl">
+		<property name="commonService" ref="commonService"></property>
+		<property name="studentModelConvert" ref="studentModelConvert"></property>
+		<property name="studentDao" ref="studentDao"></property>
+		<property name="studentDataConvert" ref="studentDataConvert"></property>
+	</bean>
+	
+	<bean id="studentModelConvert" class="com.training.convert.StudentModelConvert"></bean>
+	<bean id="studentDataConvert" class="com.training.convert.StudentDataConvert"></bean>
+	<bean id="studentDao" class="com.training.dao.impl.StudentDaoImpl">
+		<property name="commonDao" ref="commonDao"></property>
+	</bean>
+</beans>
