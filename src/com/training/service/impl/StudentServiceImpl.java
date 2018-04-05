@@ -40,7 +40,7 @@ public class StudentServiceImpl implements StudentService {
 			params.put(StudentModel.NAME, studentForm.getName());
 		}
 		if (StringUtils.isNotBlank(studentForm.getClazz())) {
-			params.put(StudentModel.CLASS, studentForm.getClazz());
+			params.put(StudentModel.CLAZZ, studentForm.getClazz());
 		}
 		SearchResult<StudentModel> searchResults = studentDao.queryStudentByFields(params, page);
 		SearchResult<StudentData> results = new SearchResult<StudentData>();

@@ -29,7 +29,7 @@ public class UserServiceImpl implements UserService {
 		fields.put(UserModel.PASSWORD, password);
 		List<UserModel> userModels = commonService.getEntitiesByFields(UserModel.class, fields);
 		List<UserData> userDatas = new ArrayList<UserData>();
-		if (null != userModels) {
+		if (userModels.size() > 0) {
 			for (UserModel model : userModels) {
 				UserData data = new UserData();
 				data.setId(model.getId());
@@ -55,6 +55,32 @@ public class UserServiceImpl implements UserService {
 			return userModel;
 		}
 		return null;
+	}
+
+	// 查询用户
+	@Override
+	public UserData queryUserByNameAndPassword(String name, String password) {
+		UserData userData = new UserData();
+		Map<String, Object> fields = new HashMap<String, Object>();
+		fields.put(UserModel.NAME, name);
+		String newPassword = md5Encoder.encodePassword(name, password);
+		fields.put(UserModel.PASSWORD, newPassword);
+		List<UserModel> userModels = commonService.getEntitiesByFields(UserModel.class, fields);
+		List<UserData> userDatas = new ArrayList<UserData>();
+		if (userModels.size() > 0) {
+			for (UserModel model : userModels) {
+				UserData data = new UserData();
+				data.setId(model.getId());
+				data.setName(model.getName());
+				data.setMobile(model.getMobile());
+				data.setCreateDate(model.getCreateDate());
+				data.setModifyDate(model.getModifyDate());
+				userDatas.add(data);
+			}
+			userData = userDatas.get(0);
+		}
+		return userData;
+
 	}
 
 	// 注册用户

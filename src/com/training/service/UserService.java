@@ -12,4 +12,6 @@ public interface UserService {
 
 	void saveUser(UserForm userForm);
 
+	UserData queryUserByNameAndPassword(String name, String password);
+
 }

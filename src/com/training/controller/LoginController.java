@@ -36,16 +36,16 @@ public class LoginController {
 		loginValidator.validate(userForm, bindingResult);
 		if (bindingResult.hasErrors()) {
 			model.addAttribute("userForm", userForm);
-			return "user/login";
+			return "login";
 		}
 		String verifyCode = (String) session.getAttribute("verifyCode");
 		if (!verifyCode.equals(userForm.getVerifyCode())) {
-			return "user/login";
+			return "login";
 		}
 
 		UserData userData = userService.findUser(userForm);
 		if (null == userData) {
-			return "user/login";
+			return "login";
 		}
 		session.setAttribute("userData", userData);
 

@@ -3,12 +3,11 @@ package com.training.data;
 import java.util.Date;
 
 public class UserData {
-	private Integer id;
-	private String name;
-	private String mobile;
-
-	private Date createDate;
-	private Date modifyDate;
+	private Integer id;// 主键
+	private String name;// 用户名
+	private String mobile;// 手机号
+	private Date createDate;// 创建时间
+	private Date modifyDate;// 修改时间
 
 	public Integer getId() {
 		return id;
